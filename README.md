@@ -6,7 +6,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Known Vulnerabilities](https://snyk.io/test/github/lmammino/webhook-tunnel/badge.svg)](https://snyk.io/test/github/lmammino/webhook-tunnel)
 
-A little http proxy suitable to create tunnel for web hooks endpoint living behind a firewall or a VPN
+A little HTTP proxy suitable to create tunnels for webhook endpoints protected behind a firewall or a VPN
 
 
 ## Rationale
