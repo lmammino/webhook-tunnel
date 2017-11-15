@@ -1,0 +1,52 @@
+{
+  "name": "webhook-tunnel",
+  "version": "0.0.1",
+  "description": "A little http proxy suitable to create tunnel for web hooks endpoint living behind a firewall or a VPN",
+  "main": "src/index.js",
+  "bin": {
+    "webhook-tunnel": "src/index.js",
+    "web-tunnel": "src/index.js"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "engine-strict": true,
+  "scripts": {
+    "test:lint": "eslint src test",
+    "test:unit": "jest --verbose",
+    "test": "npm run test:lint && npm run test:unit",
+    "release:tag": "git tag $npm_package_version && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmammino/webhook-tunnel.git"
+  },
+  "keywords": [
+    "HTTP",
+    "HTTPS",
+    "Webhook",
+    "Tunnel",
+    "VPN",
+    "Firewall",
+    "Proxy"
+  ],
+  "author": "Luciano Mammino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lmammino/webhook-tunnel/issues"
+  },
+  "homepage": "https://github.com/lmammino/webhook-tunnel#readme",
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "http-proxy": "^1.16.2",
+    "yargs": "^10.0.3"
+  }
+}
