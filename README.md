@@ -51,16 +51,46 @@ does not have a supported version of Node.js already installed.
 To execute the proxy in your server:
 
 ```bash
-webhook-tunnel <port> <target>
+webhook-tunnel <target>
 ```
 
-Where `port` is the port on which the proxy will be listening to and `target` is the
-full URL where every request will be proxied to.
+Where `target` is the full URL where every request will be proxied to.
 
 E.g.
 
 ```bash
-webhook-tunnel 12345 http://myprivatejenkins.tld/somepath/
+webhook-tunnel http://myprivatejenkins.tld/somepath/
+```
+
+By default the server will be bound to `0.0.0.0:12345`.
+
+
+### Command line options
+
+This is the full list of supported command line options:
+
+```plain
+Options:
+  --help               Show help                                       [boolean]
+  --bind-address, -a   The bind address of the server
+                                                   [string] [default: "0.0.0.0"]
+  --port, -p           The port on which the server will be listening to
+                                                       [number] [default: 12345]
+  --expect-cidr, -C    Rejects the request if it is not coming from one of the
+                       specified IP ranges (CIDRs)                       [array]
+  --expect-path, -P    Rejects the request if it is not addressed to one of the
+                       specified path prefixes                           [array]
+  --expect-query, -Q   Rejects the request if it doesn't contain any of
+                       specified query parameters with a matching value (e.g.
+                       token=1234)                                       [array]
+  --expect-header, -H  Rejects the request if it doesn't contain any of
+                       specified headers with a matching value (e.g.
+                       x-token=1234)                                     [array]
+  --expect-method, -M  Rejects the request if it is not using one of the
+                       specified methods (e.g. `GET`)                    [array]
+  --log-level, -l      Logging level (one of 'fatal', 'error', 'warn', 'info',
+                       'debug', 'trace' or 'silent')  [string] [default: "info"]
+  --version            Show version number                             [boolean]
 ```
 
 
