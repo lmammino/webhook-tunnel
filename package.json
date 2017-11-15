@@ -1,6 +1,6 @@
 {
   "name": "webhook-tunnel",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A little http proxy suitable to create tunnel for web hooks endpoint living behind a firewall or a VPN",
   "main": "src/index.js",
   "bin": {
@@ -8,13 +8,15 @@
     "web-tunnel": "src/index.js"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "engine-strict": true,
   "scripts": {
     "test:lint": "eslint src test",
     "test:unit": "jest --verbose",
     "test": "npm run test:lint && npm run test:unit",
+    "package:create": "pkg . -t node8-win,node8-macos,node8-linux --out-dir build",
+    "package:publish": "node scripts/publish-release $GITHUB_TOKEN lmammino/webhook-tunnel $npm_package_version",
     "release:tag": "git tag $npm_package_version && git push --tags"
   },
   "repository": {
@@ -43,7 +45,9 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "pkg": "^4.3.0-beta.1",
+    "request-promise": "^4.2.2"
   },
   "dependencies": {
     "http-proxy": "^1.16.2",
