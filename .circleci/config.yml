@@ -21,5 +21,12 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
-      - run: if [ $CIRCLE_BRANCH = 'master' ]; then npm publish; fi
-      - run: if [ $CIRCLE_BRANCH = 'master' ]; then npm run release:tag; fi
+      - deploy:
+          name: Deploy to GitHub and NPM
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm run package:create
+              npm run package:publish
+              npm publish
+              npm run release:tag
+            fi
