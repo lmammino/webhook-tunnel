@@ -2,6 +2,7 @@ const { parse } = require('url')
 const Netmask = require('netmask').Netmask
 
 const isInCidr = (remoteAddress) => (cidr) => {
+  console.log(cidr, remoteAddress)
   const range = new Netmask(cidr)
   return range.contains(remoteAddress)
 }
@@ -19,8 +20,8 @@ module.exports = (req, options) => {
   const { path, query } = parse(req.url, true)
 
   if (options.expectCidr) {
-    if (!options.expectCidr.some(isInCidr(req.remoteAddress))) {
-      throw new Error(`Request rejected, remote address "${req.remoteAddress}" not in expected CIDRs list`)
+    if (!options.expectCidr.some(isInCidr(req.connection.remoteAddress))) {
+      throw new Error(`Request rejected, remote address "${req.connection.remoteAddress}" not in expected CIDRs list`)
     }
   }
 

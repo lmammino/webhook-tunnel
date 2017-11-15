@@ -5,7 +5,9 @@ const filterRequest = require('../src/filterRequest')
 test('It should reject requests with invalid CIDR', () => {
   const mockReq = {
     url: '/someurl',
-    remoteAddress: '127.0.0.0'
+    connection: {
+      remoteAddress: '127.0.0.0'
+    }
   }
 
   const options = {
@@ -18,7 +20,9 @@ test('It should reject requests with invalid CIDR', () => {
 test('It should accept requests with valid CIDR', () => {
   const mockReq = {
     url: '/someurl',
-    remoteAddress: '127.0.0.0'
+    connection: {
+      remoteAddress: '127.0.0.0'
+    }
   }
 
   const options = {

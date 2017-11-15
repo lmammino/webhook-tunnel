@@ -1,6 +1,6 @@
 {
   "name": "webhook-tunnel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A little HTTP proxy suitable to create tunnels for webhook endpoints protected behind a firewall or a VPN",
   "main": "src/index.js",
   "bin": {
