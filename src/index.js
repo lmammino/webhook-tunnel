@@ -93,7 +93,7 @@ var server = http.createServer(function (req, res) {
     return proxy.web(req, res, { target: argv.target })
   } catch (err) {
     logger.error(err, 'Request rejected')
-    res.writeHead(502, {'Content-Type': 'application/json'})
+    res.writeHead(400, {'Content-Type': 'application/json'})
     return res.end(JSON.stringify({error: 'Request rejected'}))
   }
 })
