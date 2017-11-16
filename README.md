@@ -27,6 +27,7 @@ security layer.
 This approach, of course, creates a connection channel from the outside to your internal infrastructure,
 so be sure to limit the access to the tunnel as much as you can.
 
+![Example CI diagram](/images/ci-example.png)
 
 ## Install
 
