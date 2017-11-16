@@ -2,7 +2,6 @@ const { parse } = require('url')
 const Netmask = require('netmask').Netmask
 
 const isInCidr = (remoteAddress) => (cidr) => {
-  console.log(cidr, remoteAddress)
   const range = new Netmask(cidr)
   return range.contains(remoteAddress)
 }
