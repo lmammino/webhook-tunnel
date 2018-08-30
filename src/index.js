@@ -62,7 +62,7 @@ const argv = yargs
   .version()
   .argv
 
-  // initializes logger
+// initializes logger
 const pretty = pino.pretty()
 pretty.pipe(process.stdout)
 const logger = pino({
@@ -81,8 +81,8 @@ const proxy = httpProxy.createProxyServer({ target: argv.target })
 
 proxy.on('error', function (err, req, res) {
   logger.error(err)
-  res.writeHead(502, {'Content-Type': 'application/json'})
-  return res.end(JSON.stringify({error: 'Proxy error'}))
+  res.writeHead(502, { 'Content-Type': 'application/json' })
+  return res.end(JSON.stringify({ error: 'Proxy error' }))
 })
 
 var server = http.createServer(function (req, res) {
@@ -93,8 +93,8 @@ var server = http.createServer(function (req, res) {
     return proxy.web(req, res, { target: argv.target })
   } catch (err) {
     logger.error(err, 'Request rejected')
-    res.writeHead(400, {'Content-Type': 'application/json'})
-    return res.end(JSON.stringify({error: 'Request rejected'}))
+    res.writeHead(400, { 'Content-Type': 'application/json' })
+    return res.end(JSON.stringify({ error: 'Request rejected' }))
   }
 })
 
