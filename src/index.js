@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const http = require('http')
 const httpProxy = require('http-proxy')
 const pino = require('pino')
