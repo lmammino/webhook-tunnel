@@ -1,6 +1,6 @@
 {
   "name": "webhook-tunnel",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A little HTTP proxy suitable to create tunnels for webhook endpoints protected behind a firewall or a VPN",
   "main": "src/index.js",
   "bin": {
@@ -53,6 +53,7 @@
     "http-proxy": "^1.17.0",
     "netmask": "^1.0.6",
     "pino": "^5.4.0",
+    "pino-pretty": "^2.0.1",
     "yargs": "^12.0.1"
   }
 }

@@ -7,17 +7,12 @@ const yargs = require('yargs')
 const filterRequest = require('./filterRequest')
 
 const argv = yargs
-  .usage(
-    '$0 <target>',
-    'Run the tunnel server',
-    (yargs) => {
-      yargs
-        .positional('target', {
-          describe: 'The URL to which proxy the requests to',
-          type: 'string'
-        })
-    }
-  )
+  .usage('$0 <target>', 'Run the tunnel server', yargs => {
+    yargs.positional('target', {
+      describe: 'The URL to which proxy the requests to',
+      type: 'string'
+    })
+  })
   .option('bind-address', {
     alias: 'a',
     describe: 'The bind address of the server',
@@ -32,52 +27,59 @@ const argv = yargs
   })
   .option('expect-cidr', {
     alias: 'C',
-    describe: 'Rejects the request if it is not coming from one of the specified IP ranges (CIDRs)',
+    describe:
+      'Rejects the request if it is not coming from one of the specified IP ranges (CIDRs)',
     type: 'array'
   })
   .option('expect-path', {
     alias: 'P',
-    describe: 'Rejects the request if it is not addressed to one of the specified path prefixes',
+    describe:
+      'Rejects the request if it is not addressed to one of the specified path prefixes',
     type: 'array'
   })
   .option('expect-query', {
     alias: 'Q',
-    describe: 'Rejects the request if it doesn\'t contain any of specified query parameters with a matching value (e.g. token=1234)',
+    describe:
+      "Rejects the request if it doesn't contain any of specified query parameters with a matching value (e.g. token=1234)",
     type: 'array'
   })
   .option('expect-header', {
     alias: 'H',
-    describe: 'Rejects the request if it doesn\'t contain any of specified headers with a matching value (e.g. x-token=1234)',
+    describe:
+      "Rejects the request if it doesn't contain any of specified headers with a matching value (e.g. x-token=1234)",
     type: 'array'
   })
   .option('expect-method', {
     alias: 'M',
-    describe: 'Rejects the request if it is not using one of the specified methods (e.g. `GET`)',
+    describe:
+      'Rejects the request if it is not using one of the specified methods (e.g. `GET`)',
     type: 'array'
   })
   .option('log-level', {
     alias: 'l',
-    describe: 'Logging level (one of \'fatal\', \'error\', \'warn\', \'info\', \'debug\', \'trace\' or \'silent\')',
+    describe:
+      "Logging level (one of 'fatal', 'error', 'warn', 'info', 'debug', 'trace' or 'silent')",
     type: 'string',
     default: 'info'
   })
-  .version()
-  .argv
+  .version().argv
 
 // initializes logger
-const pretty = pino.pretty()
-pretty.pipe(process.stdout)
 const logger = pino({
   name: 'webhook-tunnel',
   safe: true,
-  level: argv.logLevel
-}, pretty)
+  level: argv.logLevel,
+  prettyPrint: { colorize: true }
+})
 
-logger.debug({
-  runtime: process.argv[0],
-  script: process.argv[1],
-  arguments: argv
-}, 'Initializing')
+logger.debug(
+  {
+    runtime: process.argv[0],
+    script: process.argv[1],
+    arguments: argv
+  },
+  'Initializing'
+)
 
 const proxy = httpProxy.createProxyServer({ target: argv.target })
 
@@ -100,13 +102,16 @@ var server = http.createServer(function (req, res) {
   }
 })
 
-server.listen(argv.port, argv.bindAddress, (err) => {
+server.listen(argv.port, argv.bindAddress, err => {
   if (err) {
     throw err
   }
 
-  logger.info({
-    address: argv.bindAddress,
-    port: argv.port
-  }, 'Server started')
+  logger.info(
+    {
+      address: argv.bindAddress,
+      port: argv.port
+    },
+    'Server started'
+  )
 })
