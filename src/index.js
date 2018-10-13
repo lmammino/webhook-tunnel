@@ -25,6 +25,12 @@ const argv = yargs
     type: 'number',
     default: 12345
   })
+  .option('health', {
+    alias: 'h',
+    describe: 'Listen for the path /health in the request to use as a health check',
+    type: 'boolean',
+    default: false
+  })
   .option('expect-cidr', {
     alias: 'C',
     describe:
@@ -93,6 +99,9 @@ var server = http.createServer(function (req, res) {
   logger.info(`Incoming request: ${req.method} ${req.url}`)
   logger.debug(req)
   try {
+    if (argv.health && req.url.match(/health$/)) {
+      return res.end(JSON.stringify({ status: 'ok' }))
+    }
     filterRequest(req, argv)
     return proxy.web(req, res, { target: argv.target })
   } catch (err) {
