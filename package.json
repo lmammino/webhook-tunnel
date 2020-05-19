@@ -50,7 +50,7 @@
     "request-promise": "^4.2.2"
   },
   "dependencies": {
-    "http-proxy": "^1.17.0",
+    "http-proxy": "^1.18.1",
     "netmask": "^1.0.6",
     "pino": "^5.4.0",
     "pino-pretty": "^2.0.1",
